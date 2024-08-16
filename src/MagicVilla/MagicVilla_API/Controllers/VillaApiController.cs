@@ -11,11 +11,7 @@ namespace MagicVilla_API.Controllers
         [HttpGet]
         public IEnumerable<VillaDTO> GetVillas()
         {
-            return new List<VillaDTO>()
-            {
-                new VillaDTO() {Id=1, Name="Beach view"},
-                new VillaDTO() {Id=2, Name="Pool view" }
-            };
+            return 
         }
 
     }
