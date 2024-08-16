@@ -2,13 +2,15 @@
 using MagicVilla_API.Models;
 using MagicVilla_API.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.WebSockets;
 
 namespace MagicVilla_API.Controllers
 {
+    [Route("api/VillaApi")]
     [ApiController]
     public class VillaApiController : ControllerBase
     {
-        [Route("api/VillaApi")]
+        //[Route("api/VillaApi")]
         [HttpGet]
         public ActionResult<IEnumerable<VillaDTO>> GetVillas()
         {
@@ -34,6 +36,26 @@ namespace MagicVilla_API.Controllers
             }
 
             return Ok(villa);
+        }
+        //[Route("api/VillaApi")]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public ActionResult<VillaDTO> CreateVilla([FromBody]VillaDTO villaDTO)
+        {
+            if (villaDTO == null)
+            {
+                return BadRequest(villaDTO);
+            }
+            if(villaDTO.Id > 0)
+            {
+                return BadRequest(StatusCodes.Status500InternalServerError);
+            }
+
+            villaDTO.Id = VillaStore.villaList.OrderByDescending(x => x.Id).FirstOrDefault().Id+1;
+            VillaStore.villaList.Add(villaDTO);
+            return Ok(villaDTO);
         }
 
     }
