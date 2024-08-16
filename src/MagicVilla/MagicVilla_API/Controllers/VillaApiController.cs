@@ -15,7 +15,10 @@ namespace MagicVilla_API.Controllers
             return Ok (VillaStore.villaList);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id:int}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public ActionResult <VillaDTO> GetById(int id)
         {
             if(id==0)
