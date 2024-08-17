@@ -11,7 +11,7 @@ namespace MagicVilla_API.Controllers
     [ApiController]
     public class VillaApiController : ControllerBase
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<VillaApiController> _logger;
 
         public VillaApiController(ILogger<VillaApiController> logger)
         {
