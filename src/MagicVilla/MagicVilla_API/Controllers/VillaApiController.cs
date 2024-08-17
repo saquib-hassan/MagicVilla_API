@@ -13,7 +13,7 @@ namespace MagicVilla_API.Controllers
     {
         private readonly ILogger _logger;
 
-        public VillaApiController(ILogger logger)
+        public VillaApiController(ILogger<VillaApiController> logger)
         {
             _logger = logger;
         }
@@ -32,6 +32,7 @@ namespace MagicVilla_API.Controllers
         {
             if (id == 0)
             {
+                _logger.LogInformation("Id shouldn't be zero...");
                 return BadRequest();
             }
 
