@@ -1,8 +1,10 @@
 ﻿using MagicVilla_API.Data;
+using MagicVilla_API.Logging;
 using MagicVilla_API.Models;
 using MagicVilla_API.Models.Dto;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualBasic;
 using System.Net.WebSockets;
 
 namespace MagicVilla_API.Controllers
@@ -11,9 +13,10 @@ namespace MagicVilla_API.Controllers
     [ApiController]
     public class VillaApiController : ControllerBase
     {
-        private readonly ILogger<VillaApiController> _logger;
+        //private readonly ILogger<VillaApiController> _logger;
+        private readonly ILogging _logger;
 
-        public VillaApiController(ILogger<VillaApiController> logger)
+        public VillaApiController(ILogging logger)
         {
             _logger = logger;
         }
@@ -32,7 +35,7 @@ namespace MagicVilla_API.Controllers
         {
             if (id == 0)
             {
-                _logger.LogInformation("Id shouldn't be zero...");
+                _logger.Log("Id shouldn't be zero...","error");
                 return BadRequest();
             }
 
