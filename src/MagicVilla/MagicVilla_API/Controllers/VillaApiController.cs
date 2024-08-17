@@ -14,12 +14,12 @@ namespace MagicVilla_API.Controllers
     public class VillaApiController : ControllerBase
     {
         //private readonly ILogger<VillaApiController> _logger;
-        private readonly ILogging _logger;
+        //private readonly ILogging _logger;
 
-        public VillaApiController(ILogging logger)
-        {
-            _logger = logger;
-        }
+        //public VillaApiController(ILogging logger)
+        //{
+        //    _logger = logger;
+        //}
         //[Route("api/VillaApi")]
         [HttpGet]
         public ActionResult<IEnumerable<VillaDTO>> GetVillas()
@@ -35,7 +35,7 @@ namespace MagicVilla_API.Controllers
         {
             if (id == 0)
             {
-                _logger.Log("Id shouldn't be zero...","error");
+                //_logger.Log("Id shouldn't be zero...","error");
                 return BadRequest();
             }
 
