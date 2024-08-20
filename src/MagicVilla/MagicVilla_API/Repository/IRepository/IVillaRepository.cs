@@ -8,7 +8,7 @@ namespace MagicVilla_API.Repository.IRepository
         Task Create(Villa entity);
         Task Remove(Villa entity);
         Task Save();
-        Task<List<Villa>> GetAll(Expression<Func<Villa>> filter = null);
-        Task<Villa> GetVilla(Expression<Func<Villa>> filter = null, bool tracked = true);
+        Task<List<Villa>> GetAll(Expression<Func<Villa,bool>> filter = null);
+        Task<Villa> GetVilla(Expression<Func<Villa,bool>> filter = null, bool tracked = true);
     }
 }
