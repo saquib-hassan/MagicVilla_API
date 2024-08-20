@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 
 namespace MagicVilla_API.Repository.IRepository
 {
-    public interface IVillaRepository
+    public interface IVillaRepository : IRepository<Villa>
     {
     
-        Task UpdateAsync(Villa entity);
+        Task<Villa> UpdateAsync(Villa entity);
     }
 }
