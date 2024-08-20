@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace MagicVilla_API.Repository
 {
-    public class Repository<T> : IRepository<T> where T: class
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly ApplicationDbContext _db;
         internal DbSet<T> dbSet;
@@ -60,7 +60,7 @@ namespace MagicVilla_API.Repository
 
         public async Task SaveAsync()
         {
-           await _db.SaveChangesAsync();
+            await _db.SaveChangesAsync();
         }
 
     }
