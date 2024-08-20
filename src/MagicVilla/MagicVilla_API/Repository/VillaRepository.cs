@@ -1,34 +1,62 @@
-﻿using MagicVilla_API.Models;
+﻿using MagicVilla_API.Data;
+using MagicVilla_API.Models;
 using MagicVilla_API.Repository.IRepository;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace MagicVilla_API.Repository
 {
     public class VillaRepository : IVillaRepository
     {
-        public Task Create(Villa entity)
+        private readonly ApplicationDbContext _db;
+
+        public VillaRepository(ApplicationDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+        }
+        public async Task Create(Villa entity)
+        {
+            await _db.Villas.AddAsync(entity);
+            await Save();
         }
 
-        public Task<List<Villa>> GetAll(Expression<Func<Villa, bool>> filter = null)
+        public async Task<List<Villa>> GetAll(Expression<Func<Villa, bool>> filter = null)
         {
-            throw new NotImplementedException();
+             IQueryable<Villa> query = _db.Villas;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            return await query.ToListAsync();
         }
 
-        public Task<Villa> GetVilla(Expression<Func<Villa, bool>> filter = null, bool tracked = true)
+        public async Task<Villa> GetVilla(Expression<Func<Villa, bool>> filter = null, bool tracked = true)
         {
-            throw new NotImplementedException();
+            IQueryable<Villa> query = _db.Villas;
+
+            if(!tracked)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+            return await query.FirstOrDefaultAsync();
         }
 
-        public Task Remove(Villa entity)
+        public async Task Remove(Villa entity)
         {
-            throw new NotImplementedException();
+             _db.Villas.Remove(entity);
+           await Save();
+            
         }
 
-        public Task Save()
+        public async Task Save()
         {
-            throw new NotImplementedException();
+             _db.SaveChangesAsync();
         }
     }
 }
