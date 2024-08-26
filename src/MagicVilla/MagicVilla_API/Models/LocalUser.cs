@@ -9,3 +9,6 @@
         public string Role { get; set; }
     }
 }
+
+
+//No contribution today
