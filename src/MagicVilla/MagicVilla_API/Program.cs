@@ -23,6 +23,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddSingleton<ILogging, Logging>();
 
+
+//Use a try catch block here in the future
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
