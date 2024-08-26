@@ -42,9 +42,19 @@ namespace MagicVilla_API.Controllers
 
 
         [HttpPost("login")]
-        public IActionResult Register()
+        public async Task<IActionResult> Register(RegistrationRequestDTO model)
         {
-            return View();
+            var ifUserIsUnique = _userRepository.isUniqueUser(model.UserName);
+            if (!ifUserIsUnique)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("User name already exist");
+                return BadRequest(_response);
+            }
+            var user = await _userRepository.Register(model);
+
+            //return View();
         }
     }
 }
