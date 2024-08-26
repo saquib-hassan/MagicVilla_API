@@ -3,6 +3,7 @@ using MagicVilla_API.Models;
 using MagicVilla_API.Models.Dto;
 using MagicVilla_API.Repository.IRepository;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
@@ -22,10 +23,11 @@ namespace MagicVilla_API.Repository
         public bool isUniqueUser(string username)
         {
             var user = _db.LocalUsers.FirstOrDefault(u=>u.UserName == username);
-            if (username == null)
+            if (user == null)
             {
                 return true;
             }
+
             return false;
         }
 
@@ -53,9 +55,14 @@ namespace MagicVilla_API.Repository
 
             if(user == null)
             {
-                return null;
+               return new LoginResponseDTO()
+                {
+                    Token = "",
+                    User = null
+                };
             }
-            //Need the JWT token here.
+
+            //If user is found then use the JWT token here.
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(secretkey);
 
