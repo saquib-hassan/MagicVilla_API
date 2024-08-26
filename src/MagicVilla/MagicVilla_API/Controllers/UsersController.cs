@@ -53,8 +53,18 @@ namespace MagicVilla_API.Controllers
                 return BadRequest(_response);
             }
             var user = await _userRepository.Register(model);
+            if (user == null)
+            {
+                _response.StatusCode = HttpStatusCode.BadRequest;
+                _response.IsSuccess = false;
+                _response.ErrorMessages.Add("Error while registering");
+                return BadRequest(_response);
+            }
 
-            //return View();
+            _response.StatusCode= HttpStatusCode.OK;
+            _response.IsSuccess = true;
+            return Ok(_response);
+            
         }
     }
 }
