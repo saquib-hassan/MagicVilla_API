@@ -2,6 +2,6 @@
 {
     public class TegistrationRequestDTO
     {
-
+        public string UserName { get; set; }
     }
 }
