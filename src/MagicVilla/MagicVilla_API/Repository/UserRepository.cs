@@ -31,7 +31,7 @@ namespace MagicVilla_API.Repository
             return false;
         }
 
-        public async Task<LocalUser> LocalUser(RegistrationRequestDTO registrationRequestDTO)
+        public async Task<LocalUser> Register(RegistrationRequestDTO registrationRequestDTO)
         {
             var user = new LocalUser()
             {

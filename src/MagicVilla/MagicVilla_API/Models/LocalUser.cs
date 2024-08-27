@@ -1,4 +1,7 @@
-﻿namespace MagicVilla_API.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace MagicVilla_API.Models
 {
     public class LocalUser
     {

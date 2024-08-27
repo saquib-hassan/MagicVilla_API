@@ -41,7 +41,7 @@ namespace MagicVilla_API.Controllers
 
 
 
-        [HttpPost("login")]
+        [HttpPost("register")]
         public async Task<IActionResult> Register(RegistrationRequestDTO model)
         {
             var ifUserIsUnique = _userRepository.isUniqueUser(model.UserName);
